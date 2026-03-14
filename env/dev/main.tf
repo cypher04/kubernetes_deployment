@@ -38,3 +38,17 @@ module "aks" {
     admin_password    = var.admin_password
   }
 }
+
+
+module "private_endpoint" {
+  source              = "../../modules/private_endpoint"
+  resource_group = azurerm_resource_group.kubernetes.name
+  location       = var.location
+  subnet_prefixes = var.subnet_prefixes
+  vnet_id = module.networking.vnet_id
+  subnet_ids = module.networking.subnet_ids
+  aks_id = module.aks.aks_id
+  acr_id = module.compute.acr_id
+}
+
+
