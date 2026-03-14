@@ -21,7 +21,7 @@ resource "azurerm_subnet" "kube_subnet_02" {
 
 }
 
-resource "azurerm_subnet" "spoke_subnet_web" {
+resource "azurerm_subnet" "subnet_web" {
     name                 = "spoke-subnet-web"
     resource_group_name  = var.resource_group
     virtual_network_name = azurerm_virtual_network.kube_vnet.name
