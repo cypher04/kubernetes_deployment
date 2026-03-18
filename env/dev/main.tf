@@ -9,7 +9,8 @@ module "compute" {
   source              = "../../modules/compute"
   location            = var.location
   resource_group      = azurerm_resource_group.kubernetes.name
-  
+  kube_principal_id = module.aks.kube_principal_id
+
 
   # depends_on = [module.database]
 }
