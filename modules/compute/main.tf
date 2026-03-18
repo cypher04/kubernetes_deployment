@@ -6,11 +6,11 @@ resource "azurerm_resource_group" "kubernetes" {
 
 
 
-resource "azurerm_container_registry" "kubernetes" {
-  name                = "kubernetes"
+resource "azurerm_container_registry" "aks_acr" {
+  name                = "kubedeployacr"
   resource_group_name = var.resource_group
   location            = var.location
-  sku                 = "Basic"
+  sku                 = "Premium"
 
 
   identity {
@@ -19,15 +19,17 @@ resource "azurerm_container_registry" "kubernetes" {
 }
 
 
+
 resource "azurerm_role_assignment" "acr_pull" {
-  scope                = azurerm_container_registry.kubernetes.id
+  scope                = azurerm_container_registry.aks_acr.id
   role_definition_name = "AcrPull"
-  principal_id         = azurerm_kubernetes_cluster.kubernetes.identity[0].principal_id
+  principal_id         = var.kube_principal_id
   
 }
 
 resource "azurerm_role_assignment" "acr_push" {
-  scope                = azurerm_container_registry.kubernetes.id
+  scope                = azurerm_container_registry.aks_acr.id
   role_definition_name = "AcrPush"
-  principal_id         = azurerm_kubernetes_cluster.kubernetes.identity[0].principal_id
+  principal_id         = var.kube_principal_id
 }
+
