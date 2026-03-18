@@ -1,5 +1,5 @@
 resource_group_name = "rg-kube-001"
-location            = "eastus"
+location            = "West Europe"
 project_name        = "kube-aks-001"
 environment         = "dev"
 cluster_name       = "aks-kube-001"
