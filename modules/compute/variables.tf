@@ -7,3 +7,8 @@ variable "location" {
     description = "The location of the resource group"
     type        = string
 }
+
+variable "kube_principal_id" {
+    description = "The principal ID of the Kubernetes cluster's managed identity"
+    type        = string
+}
